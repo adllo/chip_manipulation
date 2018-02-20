@@ -20,6 +20,8 @@ import android.widget.TextView;
 
 import com.google.android.flexbox.FlexboxLayout;
 
+import org.w3c.dom.Text;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -63,8 +65,8 @@ public class ChipManipulation extends LinearLayout {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         LinearLayout linearLayout = (LinearLayout) layoutInflater.inflate(R.layout.flexbox_template, this, true);
 
-        flexLayout = linearLayout.findViewById(R.id.divFlex);
-        mEditText = linearLayout.findViewById(R.id.editText);
+        flexLayout = (FlexboxLayout) linearLayout.findViewById(R.id.divFlex);
+        mEditText = (EditText) linearLayout.findViewById(R.id.editText);
         mEditText.setOnKeyListener(onKeyPress());
 
         TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.chip_drawable);
@@ -148,10 +150,10 @@ public class ChipManipulation extends LinearLayout {
     private LinearLayout createNewTextView(String text) {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
         LinearLayout linearLayout = (LinearLayout) layoutInflater.inflate(R.layout.text_template, null);
-        final RelativeLayout relativeLayout = linearLayout.findViewById(R.id.relative1);
+        final RelativeLayout relativeLayout = (RelativeLayout) linearLayout.findViewById(R.id.relative1);
 
-        mTextView = relativeLayout.findViewById(R.id.textview1);
-        mTextViewX = relativeLayout.findViewById(R.id.textViewX);
+        mTextView = (TextView) relativeLayout.findViewById(R.id.textview1);
+        mTextViewX = (TextView) relativeLayout.findViewById(R.id.textViewX);
         mTextView.setText("#" + text);
 
         if (chipBackgroundColor != null)
