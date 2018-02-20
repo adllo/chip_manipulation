@@ -23,19 +23,22 @@ clear_symbol_color : change clear_symbol_color inside chip. only accepts hex val
 ```
 
 ## method
-`setValue` (string or array list)
+##### setValue
 
 method to set value into chip, accepts string or array list
+
 ex:
 ```
 chip.setValue(exampleArray);
 chip.setValue("exampleString");
 ```
 
-`getValue`
+##### getValue
 
 method to get value from chip, return to array of string
+
 ex:
-chip.getValue();
-return `[#example1, #example2, #example3]`
 ```
+chip.getValue();
+```
+return `[#example1, #example2, #example3]`
