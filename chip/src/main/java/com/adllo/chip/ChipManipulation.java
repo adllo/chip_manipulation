@@ -9,6 +9,8 @@ import android.graphics.drawable.GradientDrawable;
 import android.os.Build;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
@@ -67,21 +69,23 @@ public class ChipManipulation extends LinearLayout {
 
         flexLayout = (FlexboxLayout) linearLayout.findViewById(R.id.divFlex);
         mEditText = (EditText) linearLayout.findViewById(R.id.editText);
-        mEditText.setOnKeyListener(onKeyPress());
-
-        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.chip_drawable);
-        chipBackgroundColor = a.getString(R.styleable.chip_drawable_background_color);
-        chipTextColor = a.getString(R.styleable.chip_drawable_text_color);
-        chipClearSymbolColor = a.getString(R.styleable.chip_drawable_clear_symbol_color);
-    }
-
-    private View.OnKeyListener onKeyPress() {
-        return new View.OnKeyListener() {
-            @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN_MR1)
+//        mEditText.setOnKeyListener(onKeyPress());
+        mEditText.addTextChangedListener(new TextWatcher() {
             @Override
-            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-                switch (keyCode) {
-                    case KeyEvent.KEYCODE_SPACE:
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+                charSequence.toString();
+
+                if (charSequence.length() > 0)
+                {
+                    String keyCode = (String) charSequence.toString().substring(charSequence.length() - 1);
+
+                    if (keyCode.equals(" "))
+                    {
                         String newString = mEditText.getText().toString().trim();
 
                         if (newString != null && !newString.isEmpty())
@@ -89,12 +93,41 @@ public class ChipManipulation extends LinearLayout {
                             flexLayout.addView(createNewTextView(newString), indexCount++);
                             mEditText.setText("");
                         }
+                    }
                 }
-
-                return true;
             }
-        };
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
+
+        TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.chip_drawable);
+        chipBackgroundColor = a.getString(R.styleable.chip_drawable_background_color);
+        chipTextColor = a.getString(R.styleable.chip_drawable_text_color);
+        chipClearSymbolColor = a.getString(R.styleable.chip_drawable_clear_symbol_color);
     }
+
+//    private View.OnKeyListener onKeyPress() {
+//        return new View.OnKeyListener() {
+//            @Override
+//            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
+//                switch (keyCode) {
+//                    case KeyEvent.KEYCODE_SPACE:
+//                        String newString = mEditText.getText().toString().trim();
+//
+//                        if (newString != null && !newString.isEmpty())
+//                        {
+//                            flexLayout.addView(createNewTextView(newString), indexCount++);
+//                            mEditText.setText("");
+//                        }
+//                }
+//
+//                return true;
+//            }
+//        };
+//    }
 
     private void setBackgroundColor(String backgroundColor)
     {
