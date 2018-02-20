@@ -41,6 +41,7 @@ public class ChipManipulation extends LinearLayout {
     private String chipBackgroundColor;
     private String chipTextColor;
     private String chipClearSymbolColor;
+    private String chipHint;
 
     public ChipManipulation(Context context) {
         super(context);
@@ -107,6 +108,12 @@ public class ChipManipulation extends LinearLayout {
         chipBackgroundColor = a.getString(R.styleable.chip_drawable_background_color);
         chipTextColor = a.getString(R.styleable.chip_drawable_text_color);
         chipClearSymbolColor = a.getString(R.styleable.chip_drawable_clear_symbol_color);
+        chipHint = a.getString(R.styleable.chip_drawable_hint);
+
+        if (chipHint != null)
+        {
+            mEditText.setHint(chipHint);
+        }
     }
 
 //    private View.OnKeyListener onKeyPress() {

@@ -12,6 +12,7 @@ Manipulation function for chip
     chip_attribute:background_color="#F2A81A"
     chip_attribute:text_color="#6B6861"
     chip_attribute:clear_symbol_color="#000000"
+    chip_attribute:hint="input chip here!!!"
 />
 ```
 
@@ -20,6 +21,7 @@ Manipulation function for chip
 background_color : change chip color. only accepts hex value with #
 text_color : change text color inside chip. only accepts hex value with #
 clear_symbol_color : change clear_symbol_color inside chip. only accepts hex value with #
+hint : set hint text. default: input chip here!
 ```
 
 ## method
