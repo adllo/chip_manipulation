@@ -84,8 +84,7 @@ public class ChipManipulation extends LinearLayout {
 
                         if (newString != null && !newString.isEmpty())
                         {
-                            flexLayout.addView(createNewTextView(newString), indexCount);
-                            indexCount++;
+                            flexLayout.addView(createNewTextView(newString), indexCount++);
                             mEditText.setText("");
                         }
                 }
@@ -112,7 +111,7 @@ public class ChipManipulation extends LinearLayout {
         mTextViewX.setTextColor(Color.parseColor(clearSymbolColor));
     }
 
-    protected ArrayList<String> getValue()
+    public ArrayList<String> getValue()
     {
         ArrayList<String> list = new ArrayList<>();
 
@@ -131,7 +130,7 @@ public class ChipManipulation extends LinearLayout {
         return list;
     }
 
-    protected void setValue(List<String> arrTemp)
+    public void setValue(List<String> arrTemp)
     {
         for(int i = 0; i < (arrTemp.size()); i++ )
         {
@@ -140,9 +139,9 @@ public class ChipManipulation extends LinearLayout {
         }
     }
 
-    private void setValue(String data)
+    public void setValue(String data)
     {
-        flexLayout.addView(createNewTextView(data), indexCount);
+        flexLayout.addView(createNewTextView(data), indexCount++);
     }
 
     @SuppressLint("ResourceAsColor")
@@ -175,7 +174,7 @@ public class ChipManipulation extends LinearLayout {
         mTextViewX.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                relativeLayout.setVisibility(View.GONE);
+            relativeLayout.setVisibility(View.GONE);
             }
         });
 
