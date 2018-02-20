@@ -1,0 +1,4 @@
+<resources>
+    <string name="app_name">chip</string>
+    <string name="chip_clear_text">x</string>
+</resources>

@@ -1,0 +1,7 @@
+<resources>
+    <declare-styleable name="chip_drawable">
+        <attr name="background_color" format="string"/>
+        <attr name="text_color" format="string"/>
+        <attr name="clear_symbol_color" format="string"/>
+    </declare-styleable>
+</resources>
