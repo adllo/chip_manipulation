@@ -31,5 +31,4 @@
             android:layout_toRightOf="@+id/textview1" />
 
     </RelativeLayout>
-
 </LinearLayout>

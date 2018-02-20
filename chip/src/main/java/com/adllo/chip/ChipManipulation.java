@@ -12,6 +12,7 @@ import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -25,7 +26,9 @@ import com.google.android.flexbox.FlexboxLayout;
 import org.w3c.dom.Text;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 /**
  * Created by dev_three_adllo on 2/20/18.
@@ -42,6 +45,8 @@ public class ChipManipulation extends LinearLayout {
     private String chipTextColor;
     private String chipClearSymbolColor;
     private String chipHint;
+    private String chipType = "hashtag";
+    private String chipSymbol;
 
     public ChipManipulation(Context context) {
         super(context);
@@ -87,11 +92,16 @@ public class ChipManipulation extends LinearLayout {
 
                     if (keyCode.equals(" "))
                     {
-                        String newString = mEditText.getText().toString().trim();
+                        String text = mEditText.getText().toString().trim();
 
-                        if (newString != null && !newString.isEmpty())
+                        if (chipType.equals("hashtag"))
                         {
-                            flexLayout.addView(createNewTextView(newString), indexCount++);
+                            text = applyHashtagRules(text);
+                        }
+
+                        if (text != null && !text.isEmpty())
+                        {
+                            flexLayout.addView(createNewTextView(text), indexCount++);
                             mEditText.setText("");
                         }
                     }
@@ -109,6 +119,8 @@ public class ChipManipulation extends LinearLayout {
         chipTextColor = a.getString(R.styleable.chip_drawable_text_color);
         chipClearSymbolColor = a.getString(R.styleable.chip_drawable_clear_symbol_color);
         chipHint = a.getString(R.styleable.chip_drawable_hint);
+        chipType = a.getString(R.styleable.chip_drawable_type);
+        setSymbol();
 
         if (chipHint != null)
         {
@@ -116,25 +128,22 @@ public class ChipManipulation extends LinearLayout {
         }
     }
 
-//    private View.OnKeyListener onKeyPress() {
-//        return new View.OnKeyListener() {
-//            @Override
-//            public boolean onKey(View view, int keyCode, KeyEvent keyEvent) {
-//                switch (keyCode) {
-//                    case KeyEvent.KEYCODE_SPACE:
-//                        String newString = mEditText.getText().toString().trim();
-//
-//                        if (newString != null && !newString.isEmpty())
-//                        {
-//                            flexLayout.addView(createNewTextView(newString), indexCount++);
-//                            mEditText.setText("");
-//                        }
-//                }
-//
-//                return true;
-//            }
-//        };
-//    }
+    private void setSymbol()
+    {
+        Map<String, String> map = new HashMap<>();
+
+        map.put("hashtag", "#");
+        map.put("mention", "@");
+
+        chipSymbol = map.get(chipType);
+    }
+
+    private String applyHashtagRules(String text)
+    {
+        Map<String, String> map = new HashMap<>();
+
+        return text.replaceAll("[^a-zA-Z0-9_]", "");
+    }
 
     private void setBackgroundColor(String backgroundColor)
     {
@@ -189,12 +198,13 @@ public class ChipManipulation extends LinearLayout {
     @SuppressLint("ResourceAsColor")
     private LinearLayout createNewTextView(String text) {
         LayoutInflater layoutInflater = LayoutInflater.from(mContext);
-        LinearLayout linearLayout = (LinearLayout) layoutInflater.inflate(R.layout.text_template, null);
+        final LinearLayout linearLayout = (LinearLayout) layoutInflater.inflate(R.layout.text_template, null);
         final RelativeLayout relativeLayout = (RelativeLayout) linearLayout.findViewById(R.id.relative1);
 
         mTextView = (TextView) relativeLayout.findViewById(R.id.textview1);
         mTextViewX = (TextView) relativeLayout.findViewById(R.id.textViewX);
-        mTextView.setText("#" + text);
+
+        mTextView.setText(chipSymbol + text);
 
         if (chipBackgroundColor != null)
         {
@@ -216,6 +226,7 @@ public class ChipManipulation extends LinearLayout {
         mTextViewX.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+            linearLayout.setPadding(0, 0, 0, 0);
             relativeLayout.setVisibility(View.GONE);
             }
         });

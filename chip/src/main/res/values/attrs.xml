@@ -4,5 +4,6 @@
         <attr name="text_color" format="string"/>
         <attr name="clear_symbol_color" format="string"/>
         <attr name="hint" format="string"/>
+        <attr name="type" format="string"/>
     </declare-styleable>
 </resources>

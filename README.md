@@ -13,6 +13,7 @@ Manipulation function for chip
     chip_attribute:text_color="#6B6861"
     chip_attribute:clear_symbol_color="#000000"
     chip_attribute:hint="input chip here!!!"
+    chip_attribute:type="hashtag"
 />
 ```
 
@@ -22,6 +23,7 @@ background_color : change chip color. only accepts hex value with #
 text_color : change text color inside chip. only accepts hex value with #
 clear_symbol_color : change clear_symbol_color inside chip. only accepts hex value with #
 hint : set hint text. default: input chip here!
+type : set the type om chip. (hashtag to <#> or mention to <@>)
 ```
 
 ## method
