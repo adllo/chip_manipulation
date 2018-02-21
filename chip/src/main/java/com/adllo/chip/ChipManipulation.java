@@ -6,25 +6,17 @@ import android.content.res.Resources;
 import android.content.res.TypedArray;
 import android.graphics.Color;
 import android.graphics.drawable.GradientDrawable;
-import android.os.Build;
 import android.support.annotation.Nullable;
-import android.support.annotation.RequiresApi;
 import android.text.Editable;
 import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.util.Log;
-import android.view.KeyEvent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
-
 import com.google.android.flexbox.FlexboxLayout;
-
-import org.w3c.dom.Text;
-
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -88,7 +80,7 @@ public class ChipManipulation extends LinearLayout {
 
                 if (charSequence.length() > 0)
                 {
-                    String keyCode = (String) charSequence.toString().substring(charSequence.length() - 1);
+                    String keyCode = charSequence.toString().substring(charSequence.length() - 1);
 
                     if (keyCode.equals(" "))
                     {
@@ -174,7 +166,8 @@ public class ChipManipulation extends LinearLayout {
 
             if (tempText.isShown())
             {
-                list.add(tempText.getText().toString());
+                String[] text = tempText.getText().toString().split(chipSymbol);
+                list.add(text[1]);
             }
         }
 
@@ -226,8 +219,7 @@ public class ChipManipulation extends LinearLayout {
         mTextViewX.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-            linearLayout.setPadding(0, 0, 0, 0);
-            relativeLayout.setVisibility(View.GONE);
+            linearLayout.setVisibility(View.GONE);
             }
         });
 
