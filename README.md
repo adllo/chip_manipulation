@@ -39,10 +39,10 @@ chip.setValue("exampleString");
 
 ##### getValue
 
-method to get value from chip, return to array of string
+method to get value from chip, return to array of string without the symbol
 
 ex:
 ```
 chip.getValue();
 ```
-return `[#example1, #example2, #example3]`
+return `[example1, example2, example3]`
